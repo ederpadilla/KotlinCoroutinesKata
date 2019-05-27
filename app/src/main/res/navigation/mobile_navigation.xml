@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/mobile_navigation.xml"
+            app:startDestination="@id/currentWatherFragment">
+
+    <fragment android:id="@+id/currentWatherFragment"
+              android:name="com.example.coroutineskata.ui.weather.current.CurrentWatherFragment"
+              android:label="current_wather_fragment" tools:layout="@layout/current_wather_fragment"/>
+    <fragment android:id="@+id/futureListWeatherFragment"
+              android:name="com.example.coroutineskata.ui.weather.future.list.FutureListWeatherFragment"
+              android:label="future_list_weather_fragment" tools:layout="@layout/future_list_weather_fragment"/>
+    <fragment android:id="@+id/futureDetailFragment"
+              android:name="com.example.coroutineskata.ui.weather.future.detail.FutureDetailFragment"
+              android:label="future_detail_fragment" tools:layout="@layout/future_detail_fragment"/>
+    <fragment android:id="@+id/settingsFragment" android:name="com.example.coroutineskata.ui.settings.SettingsFragment"
+              android:label="SettingsFragment"/>
+</navigation>
