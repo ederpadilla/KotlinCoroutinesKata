@@ -8,6 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.example.coroutineskata.R
+import com.example.coroutineskata.api.MoviesClient
+import kotlinx.android.synthetic.main.current_wather_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class CurrentWatherFragment : Fragment() {
 
@@ -28,6 +33,13 @@ class CurrentWatherFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CurrentWatherViewModel::class.java)
         // TODO: Use the ViewModel
+        val apiService = MoviesClient()
+        GlobalScope.launch(Dispatchers.Main) {
+            val currentMovie =
+                apiService.getMoviewById("320288","es-MX")
+                    .await()
+            textView.text = currentMovie.toString()
+        }
     }
 
 }
