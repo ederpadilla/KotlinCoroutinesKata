@@ -11,6 +11,7 @@ class MoviesDataSourceImpl(private val apiService : MoviesClient) : MoviesDataSo
 
     override val downloadMovieInfo: LiveData<MovieDetailResponse>
         get() = _downloadMovieInfo
+
     override suspend fun fetchCurrentMovie(movieId: String, language: String) {
         try {
             val currentMovie =

@@ -1,9 +1,6 @@
 package com.example.coroutineskata.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
 const val CURRENT_ID = 0
@@ -29,14 +26,15 @@ data class MovieDetailResponse(
 	@field:SerializedName("revenue")
 	val revenue: Int,
 
-/*	@field:SerializedName("genres")
-	val genres: List<GenresItem>,*/
+
+	@field:SerializedName("genres")
+	val genres: List<GenresItem>,
 
 	@field:SerializedName("popularity")
 	val popularity: Double,
 
-/*	@field:SerializedName("production_countries")
-	val productionCountries: List<ProductionCountriesItem?>,*/
+	@field:SerializedName("production_countries")
+	val productionCountries: List<ProductionCountriesItem?>,
 
 	@field:SerializedName("vote_count")
 	val voteCount: Int,
