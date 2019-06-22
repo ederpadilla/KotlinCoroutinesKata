@@ -1,7 +1,14 @@
 package com.example.coroutineskata.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.TypeConverter
+import androidx.room.TypeConverters
 import com.google.gson.annotations.SerializedName
 
+const val CURRENT_ID = 0
+
+@Entity(tableName = "movie_detail")
 data class MovieDetailResponse(
 
 	@field:SerializedName("original_language")
@@ -22,17 +29,14 @@ data class MovieDetailResponse(
 	@field:SerializedName("revenue")
 	val revenue: Int,
 
-	@field:SerializedName("genres")
-	val genres: List<GenresItem?>,
+/*	@field:SerializedName("genres")
+	val genres: List<GenresItem>,*/
 
 	@field:SerializedName("popularity")
 	val popularity: Double,
 
-	@field:SerializedName("production_countries")
-	val productionCountries: List<ProductionCountriesItem?>,
-
-	@field:SerializedName("id")
-	val id: Int,
+/*	@field:SerializedName("production_countries")
+	val productionCountries: List<ProductionCountriesItem?>,*/
 
 	@field:SerializedName("vote_count")
 	val voteCount: Int,
@@ -52,11 +56,12 @@ data class MovieDetailResponse(
 	@field:SerializedName("poster_path")
 	val posterPath: String,
 
-	@field:SerializedName("spoken_languages")
+/*	@field:SerializedName("spoken_languages")
 	val spokenLanguages: List<SpokenLanguagesItem?>,
 
 	@field:SerializedName("production_companies")
-	val productionCompanies: List<ProductionCompaniesItem?>,
+	@TypeConverters(ProductionCompaniesItemTypeConverters::class)
+	val productionCompanies: List<ProductionCompaniesItem?>,*/
 
 	@field:SerializedName("release_date")
 	val releaseDate: String,
@@ -65,7 +70,7 @@ data class MovieDetailResponse(
 	val voteAverage: Double,
 
 	@field:SerializedName("belongs_to_collection")
-	val belongsToCollection: Any,
+	val belongsToCollection: Boolean,
 
 	@field:SerializedName("tagline")
 	val tagline: String,
@@ -77,5 +82,10 @@ data class MovieDetailResponse(
 	val homepage: String,
 
 	@field:SerializedName("status")
-	val status: String
+	val status: String,
+
+	@PrimaryKey(autoGenerate = false)
+	var id : Int = CURRENT_ID
+
+
 )

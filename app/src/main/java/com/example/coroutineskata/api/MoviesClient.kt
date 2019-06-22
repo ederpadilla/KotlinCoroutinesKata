@@ -22,7 +22,9 @@ interface MoviesClient {
     ) : Deferred<MovieDetailResponse>
 
     companion object {
-        operator fun invoke() : MoviesClient{
+        operator fun invoke(
+            connectivityIntercpetor: ConnectivityIntercpetor
+        ) : MoviesClient{
             val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val requestInterceptor = Interceptor{chain ->
                 val url = chain.request()
@@ -39,6 +41,7 @@ interface MoviesClient {
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
                 .addInterceptor(logging)
+                .addInterceptor(connectivityIntercpetor)
                 .build()
             return Retrofit.Builder()
                 .client(okHttpClient)
