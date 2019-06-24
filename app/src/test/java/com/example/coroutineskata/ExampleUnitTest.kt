@@ -4,7 +4,6 @@ import kotlinx.coroutines.*
 import org.junit.Test
 
 import org.junit.Assert.*
-import java.util.concurrent.Executor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -17,13 +16,14 @@ class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
         //exampleBlocking()
-        //exampleBlickingispatcher()
+        //exampleBlockingispatcher()
         //`example Launch Global`()
         //`example Launch Waiting`()
         //`example Launch Corutine Scope`()
         //`example Launch Corutine Scope Custom Dispatcher`()
         //`example Async Await`()
-        `example with Context`()
+        //`example Async Await more`()
+        //`example with Context`()
         assertEquals(4, 2 + 2)
     }
 
@@ -40,7 +40,7 @@ class ExampleUnitTest {
         println("three")
     }
 
-    fun exampleBlickingispatcher(){
+    fun exampleBlockingispatcher(){
         runBlocking(Dispatchers.Default) {
             println("one - from thread ${Thread.currentThread().name}")
             printDelayed("two - from thread ${Thread.currentThread().name}")
@@ -69,9 +69,12 @@ class ExampleUnitTest {
 
     fun `example Launch Corutine Scope`() = runBlocking{
         println("one - from thread ${Thread.currentThread().name}")
-        launch(Dispatchers.IO) {
+        launch{
             printDelayed("two - from thread ${Thread.currentThread().name}")
         }
+        //launch(Dispatchers.IO) {
+        //    printDelayed("two - from thread ${Thread.currentThread().name}")
+        //}
         println("Three - from thread ${Thread.currentThread().name}")
     }
 
@@ -87,7 +90,7 @@ class ExampleUnitTest {
         (customDispatcher.executor as ExecutorService).shutdown()
     }
 
-    suspend fun calculateHArdThings(startNum : Int) : Int {
+    suspend fun calculateHardThings(startNum : Int) : Int {
         delay(1000)
         return startNum * 10
     }
@@ -95,13 +98,13 @@ class ExampleUnitTest {
     fun `example Async Await`() = runBlocking{
         val startTime = System.currentTimeMillis()
         val deferred1 = async{
-            calculateHArdThings(10)
+            calculateHardThings(10)
         }
         val deferred2 = async{
-            calculateHArdThings(20)
+            calculateHardThings(20)
         }
         val deferred3 = async{
-            calculateHArdThings(30)
+            calculateHardThings(30)
         }
         val sum = deferred1.await()+deferred2.await()+deferred3.await()
         println("async/await result = $sum")
@@ -112,13 +115,13 @@ class ExampleUnitTest {
     fun `example Async Await more`() = runBlocking{
         val startTime = System.currentTimeMillis()
         val deferred1 = async{
-            calculateHArdThings(10)
+            calculateHardThings(10)
         }.await()
         val deferred2 = async{
-            calculateHArdThings(20)
+            calculateHardThings(20)
         }.await()
         val deferred3 = async{
-            calculateHArdThings(30)
+            calculateHardThings(30)
         }.await()
         val sum = deferred1+deferred2+deferred3
         println("async/await result = $sum")
@@ -129,13 +132,13 @@ class ExampleUnitTest {
     fun `example with Context`() = runBlocking{
         val startTime = System.currentTimeMillis()
         val result1 = withContext(Dispatchers.Default){
-            calculateHArdThings(10)
+            calculateHardThings(10)
         }
         val result2 = withContext(Dispatchers.Default){
-            calculateHArdThings(20)
+            calculateHardThings(20)
         }
         val result3 = withContext(Dispatchers.Default){
-            calculateHArdThings(30)
+            calculateHardThings(30)
         }
         val sum = result1+result2+result3
         println("async/await result = $sum")
